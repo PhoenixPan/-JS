@@ -1,9 +1,7 @@
-console.log("loaded");
-
 class Slider {
   constructor(id, cycle = 3000) {
     this.container = document.getElementById(id);
-    this.items = this.container.querySelectorAll(
+    this.sliderItems = this.container.querySelectorAll(
       ".slider-list-item, .slider-list-item-selected"
     );
     this.cycle = cycle;
@@ -63,7 +61,7 @@ class Slider {
     return this.container.querySelector(".slider-list-item-selected");
   }
   getSelectedItemIndex() {
-    return Array.from(this.items).indexOf(this.getSelectedItem());
+    return Array.from(this.sliderItems).indexOf(this.getSelectedItem());
   }
 
   slideTo(index) {
@@ -72,7 +70,7 @@ class Slider {
       selectedItem.className = "slider-list-item";
     }
 
-    const item = this.items[index];
+    const item = this.sliderItems[index];
     if (item) {
       item.className = "slider-list-item-selected";
     }
@@ -84,14 +82,14 @@ class Slider {
 
   slideNext() {
     const currentIndex = this.getSelectedItemIndex();
-    const nextIndex = (currentIndex + 1) % this.items.length;
+    const nextIndex = (currentIndex + 1) % this.sliderItems.length;
     this.slideTo(nextIndex);
   }
 
   slidePrevious() {
     const currentIndex = this.getSelectedItemIndex();
     const previousIndex =
-      (currentIndex - 1 + this.items.length) % this.items.length;
+      (currentIndex - 1 + this.sliderItems.length) % this.sliderItems.length;
     this.slideTo(previousIndex);
   }
 
